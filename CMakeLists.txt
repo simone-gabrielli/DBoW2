@@ -21,15 +21,21 @@ set(HDRS
   include/DBoW2/BowVector.h           include/DBoW2/FBrief.h
   include/DBoW2/QueryResults.h        include/DBoW2/TemplatedDatabase.h   include/DBoW2/FORB.h
   include/DBoW2/DBoW2.h               include/DBoW2/FClass.h              include/DBoW2/FeatureVector.h
-  include/DBoW2/ScoringObject.h       include/DBoW2/TemplatedVocabulary.h)
+  include/DBoW2/ScoringObject.h       include/DBoW2/TemplatedVocabulary.h include/DBoW2/FSuperpoint256.h)
 set(SRCS 
   src/BowVector.cpp     src/FBrief.cpp        src/FORB.cpp
-  src/FeatureVector.cpp src/QueryResults.cpp  src/ScoringObject.cpp)
+  src/FeatureVector.cpp src/QueryResults.cpp  src/ScoringObject.cpp
+  src/FSuperpoint256.cpp)
 
 set(DEPENDENCY_DIR ${CMAKE_CURRENT_BINARY_DIR}/dependencies)
 set(DEPENDENCY_INSTALL_DIR ${DEPENDENCY_DIR}/install)
 
-find_package(OpenCV REQUIRED)
+cmake_path(GET CMAKE_CURRENT_SOURCE_DIR PARENT_PATH MY_PARENT_DIR)
+set(OpenCV_INCLUDE_DIRS ${MY_PARENT_DIR}/opencv_4.5.5/include)
+set(OpenCV_LIB_DIR ${MY_PARENT_DIR}/opencv_4.5.5/x64/vc16/lib)
+
+set(OpenCV_LIBS ${OpenCV_LIB_DIR}/opencv_world455.lib)  # Use opencv_world if available
+
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 if(BUILD_DBoW2)
@@ -44,7 +50,7 @@ if(BUILD_DBoW2)
 endif(BUILD_DBoW2)
 
 if(BUILD_Demo)
-  add_executable(demo demo/demo.cpp)
+  add_executable(demo demo/demo_float.cpp)
   target_link_libraries(demo ${PROJECT_NAME} ${OpenCV_LIBS})
   set_target_properties(demo PROPERTIES CXX_STANDARD 11)
   file(COPY demo/images DESTINATION ${CMAKE_BINARY_DIR}/)

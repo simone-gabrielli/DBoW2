@@ -56,6 +56,7 @@ namespace DBoW2
 #include "QueryResults.h"
 #include "FBrief.h"
 #include "FORB.h"
+#include "FSuperpoint256.h"
 
 /// ORB Vocabulary
 typedef DBoW2::TemplatedVocabulary<DBoW2::FORB::TDescriptor, DBoW2::FORB> 
@@ -69,9 +70,15 @@ typedef DBoW2::TemplatedDatabase<DBoW2::FORB::TDescriptor, DBoW2::FORB>
 typedef DBoW2::TemplatedVocabulary<DBoW2::FBrief::TDescriptor, DBoW2::FBrief> 
   BriefVocabulary;
 
-/// BRIEF Database
+/// FBRIEF Database
 typedef DBoW2::TemplatedDatabase<DBoW2::FBrief::TDescriptor, DBoW2::FBrief> 
   BriefDatabase;
+
+/// Superpoint256 Vocabulary
+typedef DBoW2::TemplatedVocabulary<DBoW2::FSuperpoint256::TDescriptor, DBoW2::FSuperpoint256> Superpoint256Vocabulary;
+
+/// FSuperpoint256 Database
+typedef DBoW2::TemplatedDatabase<DBoW2::FSuperpoint256::TDescriptor, DBoW2::FSuperpoint256> Superpoint256Database;
 
 #endif
 
